@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
 
-if (process.env.NODE_ENV !== 'production') {
+// if (process.env.NODE_ENV !== 'production') {
     dotenv.config();
-}
+// }
 
 import express from 'express';
 import expressLayouts from 'express-ejs-layouts';
