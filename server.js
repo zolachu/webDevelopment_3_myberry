@@ -1,13 +1,13 @@
-import dotenv from 'dotenv';
+import 'dotenv/config';
 
 // if (process.env.NODE_ENV !== 'production') {
-    dotenv.config();
+// dotenv.config();
 // }
 
 import express from 'express';
 import expressLayouts from 'express-ejs-layouts';
-import path from "path";
-import {dirname} from 'path';
+import path from 'path';
+import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -42,5 +42,3 @@ connectDB().then(() => {
     console.log('listening for requests');
   });
 });
-
-
