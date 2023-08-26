@@ -27,23 +27,22 @@ import mongoose from 'mongoose';
 main().catch(err => console.log(err));
 
 async function main() {
-    console.log("here")
-    await mongoose.connect(process.env.DATABASE_URL);
-    console.log("hi");
-    const db = mongoose.connection;
-    console.log(db);
-    db.on('error', error => {
-        console.log(error);
-    })
-    db.once('open', () => {
-        console.log("connection established");
-    })
+  console.log('here');
+  await mongoose.connect(process.env.DATABASE_URL).then(() => {
+    app.listen(process.env.PORT || port, () => {
+      console.log(`listening on ${port}`);
+    });
+  });
+  console.log('hi');
+  const db = mongoose.connection;
+  console.log(db);
+  db.on('error', (error) => {
+    console.log(error);
+  });
+  db.once('open', () => {
+    console.log('connection established');
+  });
   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 }
 
-
 app.use('/', indexRouter);
-
-app.listen(process.env.PORT || port, () => {
-    console.log(`listening on ${port}`);
-})
