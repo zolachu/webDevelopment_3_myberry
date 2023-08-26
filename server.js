@@ -35,7 +35,7 @@ async function main() {
   });
   console.log('hi');
   const db = mongoose.connection;
-  console.log(db);
+
   db.on('error', (error) => {
     console.log(error);
   });
