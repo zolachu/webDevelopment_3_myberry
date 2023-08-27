@@ -44,13 +44,6 @@ router.get('/', async (req, res) => {
 router.get('/new', async (req, res) => {
   const book = new Book();
   renderNewPage(res, book);
-  // try {
-  //   const authors = await Author.find({});
-  //   res.render('books/new', { authors: authors, book: book });
-  // } catch (error) {
-  //   console.log(error);
-  //   res.redirect('/books');
-  // }
 });
 
 // Create Books Route
