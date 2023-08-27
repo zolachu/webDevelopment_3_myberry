@@ -3,7 +3,6 @@ import 'dotenv/config';
 // if (process.env.NODE_ENV !== 'production') {
 // dotenv.config();
 // }
-
 import express from 'express';
 import expressLayouts from 'express-ejs-layouts';
 import path from 'path';

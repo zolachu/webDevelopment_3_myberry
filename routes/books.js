@@ -4,22 +4,25 @@ import { Author } from '../models/author.js';
 import path from 'path';
 import multer from 'multer';
 import 'dotenv/config';
+
+
 // import fs from 'fs';
-// import s3fs from '@cyclic.sh/s3fs';
+import s3fs from '@cyclic.sh/s3fs';
 
-
-// const fs = s3fs(process.env.S3_BUCKET_NAME);
+const fs = s3fs(process.env.S3_BUCKET_NAME);
 // console.log(fs.unlink.toString());
 
 const uploadPath = path.join('public', coverImageBasePath);
 const router = express.Router();
 const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif'];
 
+const fileFilter = (req, file, cb) => {
+  cb(null, imageMimeTypes.includes(file.mimetype));
+};
+
 const upload = multer({
   dest: uploadPath,
-  fileFilter: (req, file, callback) => {
-    callback(null, imageMimeTypes.includes(file.mimetype));
-  },
+  fileFilter:  fileFilter,
 });
 
 // All Books Route
@@ -40,7 +43,6 @@ router.get('/', async (req, res) => {
       books: books,
       searchOptions: req.query,
     });
-    console.log(req.query);
   } catch (err) {
     res.redirect('/');
   }
@@ -67,9 +69,7 @@ router.post('/', upload.single('cover'), async (req, res) => {
   try {
     // console.log(title, description, publishDate, pageCount, req.body.author);
     await book.save();
-    console.log('saved');
     res.redirect('/books');
-    console.log('haha');
   } catch (error) {
     console.log('error');
     // if (book.coverImageName !== null) {
