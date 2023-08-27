@@ -80,12 +80,12 @@ router.post('/', upload.single('cover'), async (req, res) => {
   }
 });
 
-function removeBookCover(fileName) {
-  fs.unlink(path.join(uploadPath, fileName), (err) => {
-    console.log(err);
-    console.log('PELASE ERROR');
-  });
-}
+// function removeBookCover(fileName) {
+//   fs.unlink(path.join(uploadPath, fileName), (err) => {
+//     console.log(err);
+//     console.log('PELASE ERROR');
+//   });
+// }
 
 async function renderNewPage(res, book, hasError = false) {
   try {
