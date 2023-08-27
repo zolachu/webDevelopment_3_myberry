@@ -9,6 +9,7 @@ import s3fs from '@cyclic.sh/s3fs';
 
 
 const fs = s3fs(process.env.S3_BUCKET_NAME);
+console.log(fs.unlink.toString());
 
 const uploadPath = path.join('public', coverImageBasePath);
 const router = express.Router();
@@ -71,9 +72,9 @@ router.post('/', upload.single('cover'), async (req, res) => {
     console.log('haha');
   } catch (error) {
     console.log('error');
-    if (book.coverImageName != null) {
-      removeBookCover(book.coverImageName);
-    }
+    // if (book.coverImageName !== null) {
+    //   removeBookCover(book.coverImageName);
+    // }
 
     renderNewPage(res, book, true);
   }
@@ -82,6 +83,7 @@ router.post('/', upload.single('cover'), async (req, res) => {
 function removeBookCover(fileName) {
   fs.unlink(path.join(uploadPath, fileName), (err) => {
     console.log(err);
+    console.log('PELASE ERROR');
   });
 }
 
