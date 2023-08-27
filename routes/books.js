@@ -4,8 +4,6 @@ import { Author } from '../models/author.js';
 import path from 'path';
 import multer from 'multer';
 import 'dotenv/config';
-
-
 // import fs from 'fs';
 import s3fs from '@cyclic.sh/s3fs';
 
@@ -55,30 +53,30 @@ router.get('/new', async (req, res) => {
 });
 
 // Create Books Route
-router.post('/', upload.single('cover'), async (req, res) => {
-  const filename = req.file != null ? req.file.filename : null;
+// router.post('/', upload.single('cover'), async (req, res) => {
+//   const filename = req.file != null ? req.file.filename : null;
 
-  const book = new Book({
-    title: req.body.title,
-    description: req.body.description,
-    publishDate: new Date(req.body.publishDate),
-    pageCount: req.body.pageCount,
-    coverImageName: filename,
-    author: req.body.author,
-  });
-  try {
-    // console.log(title, description, publishDate, pageCount, req.body.author);
-    await book.save();
-    res.redirect('/books');
-  } catch (error) {
-    console.log('error');
-    // if (book.coverImageName !== null) {
-    //   removeBookCover(book.coverImageName);
-    // }
+//   const book = new Book({
+//     title: req.body.title,
+//     description: req.body.description,
+//     publishDate: new Date(req.body.publishDate),
+//     pageCount: req.body.pageCount,
+//     coverImageName: filename,
+//     author: req.body.author,
+//   });
+//   try {
+//     // console.log(title, description, publishDate, pageCount, req.body.author);
+//     await book.save();
+//     res.redirect('/books');
+//   } catch (error) {
+//     console.log('error');
+//     // if (book.coverImageName !== null) {
+//     //   removeBookCover(book.coverImageName);
+//     // }
 
-    renderNewPage(res, book, true);
-  }
-});
+//     renderNewPage(res, book, true);
+//   }
+// });
 
 // function removeBookCover(fileName) {
 //   fs.unlink(path.join(uploadPath, fileName), (err) => {
