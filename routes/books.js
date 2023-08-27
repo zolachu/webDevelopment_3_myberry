@@ -2,7 +2,6 @@ import express from 'express';
 import { Book, coverImageBasePath } from '../models/book.js';
 import { Author } from '../models/author.js';
 import path from 'path';
-import multer from 'multer';
 import 'dotenv/config';
 // import fs from 'fs';
 import s3fs from '@cyclic.sh/s3fs';
