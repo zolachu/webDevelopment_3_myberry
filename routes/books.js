@@ -4,12 +4,13 @@ import { Author } from '../models/author.js';
 import path from 'path';
 import 'dotenv/config';
 // import fs from 'fs';
+import multer from 'multer';
 import s3fs from '@cyclic.sh/s3fs';
 
 const fs = s3fs(process.env.S3_BUCKET_NAME);
 // console.log(fs.unlink.toString());
 
-const uploadPath = path.join('public', coverImageBasePath);
+const uploadPath = path.join('tmp', coverImageBasePath);
 const router = express.Router();
 const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif'];
 
@@ -19,7 +20,7 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({
   dest: uploadPath,
-  fileFilter:  fileFilter,
+  fileFilter: fileFilter,
 });
 
 // All Books Route
@@ -52,37 +53,37 @@ router.get('/new', async (req, res) => {
 });
 
 // Create Books Route
-// router.post('/', upload.single('cover'), async (req, res) => {
-//   const filename = req.file != null ? req.file.filename : null;
+router.post('/', upload.single('cover'), async (req, res) => {
+  const filename = req.file != null ? req.file.filename : null;
 
-//   const book = new Book({
-//     title: req.body.title,
-//     description: req.body.description,
-//     publishDate: new Date(req.body.publishDate),
-//     pageCount: req.body.pageCount,
-//     coverImageName: filename,
-//     author: req.body.author,
-//   });
-//   try {
-//     // console.log(title, description, publishDate, pageCount, req.body.author);
-//     await book.save();
-//     res.redirect('/books');
-//   } catch (error) {
-//     console.log('error');
-//     // if (book.coverImageName !== null) {
-//     //   removeBookCover(book.coverImageName);
-//     // }
+  const book = new Book({
+    title: req.body.title,
+    description: req.body.description,
+    publishDate: new Date(req.body.publishDate),
+    pageCount: req.body.pageCount,
+    coverImageName: filename,
+    author: req.body.author,
+  });
+  try {
+    // console.log(title, description, publishDate, pageCount, req.body.author);
+    await book.save();
+    res.redirect('/books');
+  } catch (error) {
+    console.log('error');
+    // if (book.coverImageName !== null) {
+    //   removeBookCover(book.coverImageName);
+    // }
 
-//     renderNewPage(res, book, true);
-//   }
-// });
+    renderNewPage(res, book, true);
+  }
+});
 
-// function removeBookCover(fileName) {
-//   fs.unlink(path.join(uploadPath, fileName), (err) => {
-//     console.log(err);
-//     console.log('PELASE ERROR');
-//   });
-// }
+function removeBookCover(fileName) {
+  fs.unlink(path.join(uploadPath, fileName), (err) => {
+    console.log(err);
+    console.log('PELASE ERROR');
+  });
+}
 
 async function renderNewPage(res, book, hasError = false) {
   try {
