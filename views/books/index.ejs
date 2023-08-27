@@ -1,0 +1,20 @@
+<h2>Search Books</h2>
+<form action="/books" method="GET">
+    <input id="search" name="search" <% if (locals.searchOptions) { %>value="<%= searchOptions.title %>"<%}%>
+            >
+            <label for="search">Name</label>
+            <button type="submit">Search</button>
+</form>
+
+<br />
+
+<% if (locals.books) { %>
+    <ul>
+        <% books.forEach( book=> { %>
+            <li>
+                <%= book.title %>
+                    <%= book.description %>
+            </li>
+            <% }) %>
+                <% } %>
+    </ul>

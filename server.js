@@ -15,6 +15,7 @@ import bodyParser from 'body-parser';
 
 import indexRouter from './routes/index.js';
 import authorRouter from './routes/authors.js';
+import booksRouter from './routes/books.js';
 
 const app = express();
 // const PORT = process.env.PORT || 3000;
@@ -40,6 +41,7 @@ const connectDB = async () => {
 
 app.use('/', indexRouter);
 app.use('/authors', authorRouter);
+app.use('/books', booksRouter);
 
 //Connect to the database before listening
 connectDB().then(() => {

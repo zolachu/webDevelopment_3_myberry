@@ -1,0 +1,6 @@
+add new book
+
+<form action="/books" method="POST" enctype="multipart/form-data">
+    <%- include('./_form_fields.ejs') %>
+        <%= locals.errorMessage ? errorMessage : null %>
+</form>
