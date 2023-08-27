@@ -10,8 +10,11 @@ import path from 'path';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
 
 import indexRouter from './routes/index.js';
+import authorRouter from './routes/authors.js';
 
 const app = express();
 // const PORT = process.env.PORT || 3000;
@@ -22,8 +25,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
 app.use(express.static('public'));
-
-import mongoose from 'mongoose';
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }));
 
 const connectDB = async () => {
   try {
@@ -37,6 +39,7 @@ const connectDB = async () => {
 };
 
 app.use('/', indexRouter);
+app.use('/authors', authorRouter);
 
 //Connect to the database before listening
 connectDB().then(() => {
