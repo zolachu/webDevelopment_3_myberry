@@ -5,7 +5,7 @@ import path from 'path';
 import multer from 'multer';
 import 'dotenv/config';
 // import fs from 'fs';
-import s3fs from '@cyclic.sh/s3fs/promises';
+import s3fs from '@cyclic.sh/s3fs';
 
 
 const fs = s3fs(process.env.S3_BUCKET_NAME);
