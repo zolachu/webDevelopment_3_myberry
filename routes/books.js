@@ -3,7 +3,11 @@ import { Book, coverImageBasePath } from '../models/book.js';
 import { Author } from '../models/author.js';
 import path from 'path';
 import multer from 'multer';
-import fs from 'fs';
+import 'dotenv/config';
+
+// import fs from 'fs';
+import s3fs from '@cyclic.sh/s3fs/promises';
+const fs = s3fs(process.env.S3_BUCKET_NAME);
 
 const uploadPath = path.join('public', coverImageBasePath);
 const router = express.Router();
