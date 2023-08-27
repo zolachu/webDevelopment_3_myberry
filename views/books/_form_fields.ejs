@@ -8,9 +8,9 @@
         <% if (locals.authors) {%>
             <% authors.forEach( author=> {%>
                 <%if (author.id===book.author) { %>
-                    <option value=<%=author.id%> label=<%= author.name %> selected>
+                    <option value="<%=author.id%>" label=<%=author.name %> selected>
                             <% } else { %>
-                    <option value=<%=author.id%> label=<%= author.name %> >
+                    <option value="<%=author.id%>" label=<%=author.name %> >
                             <% }%>
                                 <% })%>
                                     <% }%>
@@ -29,7 +29,7 @@
 </div>
 
 <div>
-    <textarea type="text" name="description"><%book.description%></textarea>
+    <textarea type="text" name="description"><%= book.description%></textarea>
     <label>Description</label>
 </div>
 <div>

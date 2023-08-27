@@ -1,1 +1,15 @@
 middle
+<h3>Recently added books</h3>
+
+
+<div>
+    <% if (locals.books) { %>
+        <ul>
+            <% books.forEach( book=> { %>
+                <li>
+                    <img height="150" width="100" src="<%= book.coverImagePath %>">
+                </li>
+                <% }) %>
+                    <% } %>
+        </ul>
+</div>
