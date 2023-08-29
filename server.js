@@ -11,6 +11,7 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
 
 import indexRouter from './routes/index.js';
 import authorRouter from './routes/authors.js';
@@ -24,9 +25,9 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
-app.use(express.static('tmp'));
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }));
-
+app.use(methodOverride('_method'));
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.DATABASE_URL);

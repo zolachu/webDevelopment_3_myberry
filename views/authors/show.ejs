@@ -1,0 +1,20 @@
+<% if (locals.author) {%>
+    <h2>
+        <%=author.name%>
+    </h2>
+    <a href="/authors/<%=author.id%>/edit">edit</a>
+    <%- include("../partials/deleteForm.ejs", {url: "/authors/" + author.id})%>
+        <% if (locals.booksByAuthor) {%>
+            <% if (booksByAuthor.length> 0) {%>
+                <ul>
+                    <% booksByAuthor.forEach( book=> { %>
+                        <li>
+                            <img height="150" width="100" src="<%= book.coverImagePath %>">
+                        </li>
+                        <% }) %>
+
+                </ul>
+
+                <% } %>
+                    <% } %>
+                        <% } %>

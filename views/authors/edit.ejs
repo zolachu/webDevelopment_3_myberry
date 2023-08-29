@@ -1,0 +1,9 @@
+<h2>new author</h2>
+<form action="/authors/<%=author.id%>?_method=PUT" method="POST">
+    <div class="form-control">
+        <%- include('./_form_fields.ejs') %>
+            <a href="/authors/<%=author.id%>">cancel</a>
+            <button type="submit">Update</button>
+    </div>
+    <%- include('../partials/errorMessage.ejs') %>
+</form>
